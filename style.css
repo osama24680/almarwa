@@ -1724,7 +1724,8 @@ a:active {
   padding-left: 0;
 }
 
-.main-navigation ul > li.menu-item-has-children > a:after {
+/* The Arrow after each navbar list */
+/* .main-navigation ul > li.menu-item-has-children > a:after {
   position: absolute;
   right: 1px;
   top: 50%;
@@ -1756,7 +1757,7 @@ a:active {
   -o-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
   transform: rotate(-90deg);
-}
+} */
 
 .main-navigation ul li ul {
   min-width: 290px;
@@ -5753,7 +5754,7 @@ object {
 --------------------------------------------------------------*/
 /* projects-grid
 ================================================== */
-.project-item,
+ .project-item,
 .grid-sizer {
   float: left;
   width: 33.3333333333%;
@@ -6092,7 +6093,7 @@ object {
 }
 .projects-grid.no-cat .portfolio-cates {
   display: none;
-}
+} 
 
 /*** load more button ***/
 .btn-block {
@@ -10759,8 +10760,13 @@ ol.style-default li:last-child {
   background: linear-gradient(to right, #000000, #1a1a1a);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   border-radius: 8px;
+  
 }
-
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  
+}
 /* Slider */
 .slider {
   display: flex;
@@ -10779,14 +10785,38 @@ ol.style-default li:last-child {
   width: auto;
   margin: 0;
   flex-shrink: 0;
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: opacity 0.5s ease-in-out; /* Smooth transition for transparency */
   filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3));
   border-radius: 5px;
+  border: 2px solid #9f9e9e;
+  padding: 6px;
+}
+
+/* Reduced opacity for images */
+.slider img.faded {
+  opacity: 0.3; /* Images become transparent */
 }
 
 .slider img:hover {
   transform: scale(1.1);
   opacity: 0.9;
+}
+
+.ground-text {
+  font-size: 50px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 1); /* Strong color for visibility */
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%) rotateX(20deg); /* Perspective effect */
+  z-index: 0; /* Behind the images */
+  text-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Depth */
+  transition: opacity 0.5s ease-in-out; /* Smooth transition for text visibility */
+  opacity: 0; /* Initially hidden */
 }
 
 body {

@@ -196,49 +196,6 @@
   //     }
   //   });
 
-  //   $(".ot-progress").each(function () {
-  //     var pos_y = $(this).offset().top;
-  //     var value = $(this).find(".progress-bar").data("percent");
-  //     var topOfWindow = $(window).scrollTop();
-  //     if (pos_y < topOfWindow + 900) {
-  //       $(this).find(".progress-bar").css(
-  //         {
-  //           width: value,
-  //         },
-  //         "slow"
-  //       );
-  //     }
-  //   });
-
-  //   $(".ot-progress:not([data-processed])").each(function () {
-  //     var bar = $(this),
-  //       line = bar.find(".progress-bar"),
-  //       progressEnd = bar.data("percent"),
-  //       percent = bar.find(".ppercent");
-  //     var scrollTop = $(document).scrollTop() + $(window).height();
-
-  //     if (scrollTop > bar.offset().top + bar.height()) {
-  //       bar.attr("data-processed", "true");
-  //       line.css("width", bar.outerWidth() * (progressEnd / 100) + "px");
-
-  //       for (var i = 0; i <= 50; i++) {
-  //         (function (count) {
-  //           setTimeout(function () {
-  //             percent.html(Math.round((progressEnd / 50) * count) + "%");
-  //           }, 30 * count);
-  //         })(i);
-  //       }
-  //     }
-  //   });
-
-  //   $(".ot-progress[data-processed]").each(function () {
-  //     var bar = $(this);
-  //     var line = bar.find(".progress-bar");
-  //     var progressEnd = parseInt(bar.data("percent"));
-
-  //     line.css("width", bar.outerWidth() * (progressEnd / 100) + "px");
-  //   });
-
   //   $(".circle-progress").each(function () {
   //     var bar_color = $(this).data("color");
   //     var bar_hei = $(this).data("height");
@@ -833,7 +790,7 @@
     //     );
     //   });
     // }
-  })
+  });
 })(jQuery);
 
 
@@ -1031,3 +988,56 @@ document.addEventListener("DOMContentLoaded", function () {
   setInterval(fadeImagesAndShowText, 5000); // Adjust timing as per slider duration
 });
 
+
+
+  // Function to handle progress bar animation
+  function handleProgressBars() {
+    const progressBars = document.querySelectorAll(".ot-progress");
+
+    progressBars.forEach((progress) => {
+      const posY = progress.getBoundingClientRect().top + window.scrollY;
+      const value = progress
+        .querySelector(".progress-bar")
+        .getAttribute("data-percent");
+      const topOfWindow = window.scrollY;
+
+      // Check if the element is in view
+      if (posY < topOfWindow + 900) {
+        progress.querySelector(".progress-bar").style.width = value;
+      }
+    });
+
+    progressBars.forEach((progress) => {
+      // Skip already processed progress bars
+      if (progress.dataset.processed) return;
+
+      const bar = progress;
+      const line = bar.querySelector(".progress-bar");
+      const progressEnd = parseInt(bar.getAttribute("data-percent"), 10);
+      const percentText = bar.querySelector(".ppercent");
+      const scrollTop = document.documentElement.scrollTop + window.innerHeight;
+
+      if (scrollTop > posY + bar.offsetHeight) {
+        bar.setAttribute("data-processed", "true");
+        line.style.width = `${bar.offsetWidth * (progressEnd / 100)}px`;
+
+        for (let i = 0; i <= 50; i++) {
+          setTimeout(() => {
+            percentText.innerHTML = `${Math.round((progressEnd / 50) * i)}%`;
+          }, 30 * i);
+        }
+      }
+    });
+
+    progressBars.forEach((progress) => {
+      if (progress.dataset.processed) {
+        const bar = progress;
+        const line = bar.querySelector(".progress-bar");
+        const progressEnd = parseInt(bar.getAttribute("data-percent"), 10);
+
+        line.style.width = `${bar.offsetWidth * (progressEnd / 100)}px`;
+      }
+    });
+  }
+  window.addEventListener("scroll", handleProgressBars);
+  handleProgressBars();

@@ -5766,6 +5766,9 @@ object {
 .grid-sizer.thumb2x {
   width: 66.66666666%;
 }
+.projects-grid{
+  width: 100% !important;
+}
 
 .projects-grid.pf_5_cols .project-item,
 .projects-grid.pf_5_cols .grid-sizer {
@@ -5792,6 +5795,10 @@ object {
 .projects-grid.pf_2_cols .project-item.thumb2x,
 .projects-grid.pf_2_cols .grid-sizer.thumb2x {
   width: 100%;
+}
+.thumb2x{
+  width: 50%;
+  height: 100%;
 }
 
 .projects-grid {
@@ -5892,7 +5899,7 @@ object {
 }
 .projects-grid .projects-box img {
   width: 100%;
-  height: auto;
+  /* height: auto; */
   display: block;
   transition: all 0.3s linear;
   -webkit-transition: all 0.3s linear;
@@ -6251,6 +6258,47 @@ object {
 
 .portfolio-related-title-wrap h2 {
   margin-bottom: 15px;
+}
+
+.projects-grid{
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  /* overflow: hidden; */
+  /* display: grid;  */
+  grid-gap: 0; /
+}
+
+.projects-box .projects-thumbnail {
+  position: relative;
+  overflow: hidden;
+}
+
+.projects-box .portfolio-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(10, 10, 10, 0.8);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.projects-box:hover .portfolio-info {
+  opacity: 1;
+}
+
+.projects-box img,
+.projects-box video {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover; 
+}
+
+.image2Group1 img,.image3Group1 img{
+  height: 369px ;
 }
 
 @media only screen and (min-width: 1025px) {
